@@ -3,11 +3,6 @@ from storage import load_books, save_books
 
 
 class Book:
-    """
-    Represents a single book in the library.
-    Handles its own borrow/return logic.
-    """
-
     def __init__(self, title: str, author: str, genre: str, book_id: str = None):
         self._id = book_id or str(uuid.uuid4())
         self._title = title
