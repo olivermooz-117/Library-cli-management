@@ -1,0 +1,34 @@
+[
+    {
+        "id": "book1-1111-1111-1111",
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Classic",
+        "is_borrowed": false,
+        "borrowed_by": null
+    },
+    {
+        "id": "book2-2222-2222-2222",
+        "title": "1984",
+        "author": "George Orwell",
+        "genre": "Dystopian",
+        "is_borrowed": false,
+        "borrowed_by": null
+    },
+    {
+        "id": "book3-3333-3333-3333",
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "genre": "Classic",
+        "is_borrowed": true,
+        "borrowed_by": "oliver"
+    },
+    {
+        "id": "9c20905a-6770-4277-b3f2-7eb8d5b1d5bb",
+        "title": "harry potter",
+        "author": "jk rowlins",
+        "genre": "sci-fi",
+        "is_borrowed": false,
+        "borrowed_by": null
+    }
+]

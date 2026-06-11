@@ -1,0 +1,20 @@
+[
+    {
+        "id": "9aef7d56-9169-477a-b918-c46e103dda6b",
+        "username": "oliver ",
+        "password": "c262a59b54e6c2ebf8c545b8e703730e8643e02d73191a6ba461f04971c192bd",
+        "role": "user"
+    },
+    {
+        "id": "f1cdd9f6-f383-4c55-ac8b-78a8700d45c9",
+        "username": "oliver",
+        "password": "d651dabf895bfd67ce3007905614b7ce05e247b5d74d68d7de03ee69ec904a84",
+        "role": "user"
+    },
+    {
+        "id": "bd276de8-ce86-4f8b-b782-37bec28b6cbf",
+        "username": "olive",
+        "password": "13ef24b4dd646e30c6884242a2bb26349ccc5295e12dec63d084096f017ed131",
+        "role": "admin"
+    }
+]
