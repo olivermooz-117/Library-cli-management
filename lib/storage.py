@@ -1,7 +1,7 @@
 import json
 import os
 
-DATA_DIR = os.path.join(os.path.dirname(_file_), "data")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
 BOOKS_FILE = os.path.join(DATA_DIR, "books.json")
 
