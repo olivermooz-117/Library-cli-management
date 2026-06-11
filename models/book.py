@@ -1,9 +1,13 @@
+#uuid is used to generate unique IDs for books
 import uuid
+# These functions handle loading and saving books to persistent storage (JSON file)
 from storage import load_books, save_books
 
-
+#it represents a single book object and stores informatin and methods for borrowing/returning
 class Book:
+#constructor method-called when a new book oject is created
     def __init__(self, title: str, author: str, genre: str, book_id: str = None):
+        #creates a random unique identifier
         self._id = book_id or str(uuid.uuid4())
         self._title = title
         self._author = author
@@ -12,6 +16,7 @@ class Book:
         self._borrowed_by = None   # stores username of borrower
 
     # ── Properties ───────────────────────────
+    #they allow controlled access to private attributes
     @property
     def id(self):
         return self._id
@@ -29,6 +34,7 @@ class Book:
         return self._is_borrowed
 
     # ── Borrow / Return ───────────────────────
+    #return true if borrowing succeeded,false if already borrowed
     def borrow(self, username: str) -> bool:
         if self._is_borrowed:
             print(f"[!] '{self._title}' is already borrowed by {self._borrowed_by}.")
@@ -42,6 +48,7 @@ class Book:
         if not self._is_borrowed:
             print(f"[!] '{self._title}' is not currently borrowed.")
             return False
+        # store borrower name before clearing it.
         borrower = self._borrowed_by
         self._is_borrowed = False
         self._borrowed_by = None
@@ -49,7 +56,9 @@ class Book:
         return True
 
     # ── Serialisation (to/from dict for JSON) ─
+    #these method converts Book objects into dictionaries and back again for json storage
     def to_dict(self) -> dict:
+        #convert Book object ito a dictionary because json files cannot store custom python objects directly
         return {
             "id": self._id,
             "title": self._title,
@@ -61,38 +70,40 @@ class Book:
 
     @classmethod
     def from_dict(cls, data: dict) -> "Book":
+        #create a book object from dictionary data used when loading books from json storage
+        # create book object using saved data.
         book = cls(
             title=data["title"],
             author=data["author"],
             genre=data["genre"],
             book_id=data["id"],
-        )
+        )#restores borrow status.
         book._is_borrowed = data.get("is_borrowed", False)
+        #restores borrower username.
         book._borrowed_by = data.get("borrowed_by", None)
         return book
-
+#displays formatted book details.
     def display(self):
         status = f"Borrowed by {self._borrowed_by}" if self._is_borrowed else "Available"
         print(f"  [{self._id[:8]}] {self._title} — {self._author} ({self._genre}) | {status}")
-
+# returns representation of the book object.
     def __repr__(self):
         return f"Book(title={self._title}, author={self._author})"
 
-
-# ── Library-level book functions (used by CLI) ─────────────────────────────
+# library-level functions.
 
 def get_all_books() -> list:
-    """Return all books as Book objects."""
+    #Return all books as Book objects.
     return [Book.from_dict(b) for b in load_books()]
 
 
 def save_all_books(books: list):
-    """Save a list of Book objects to JSON."""
+    #Save a list of Book objects to JSON.
     save_books([b.to_dict() for b in books])
 
 
 def find_book_by_id(book_id: str):
-    """Return a Book object by its ID prefix (first 8 chars OK), or None."""
+    #Return a Book object by its ID prefix (first 8 chars OK), or None.
     books = get_all_books()
     for book in books:
         if book.id.startswith(book_id):
@@ -101,7 +112,7 @@ def find_book_by_id(book_id: str):
 
 
 def add_book(title: str, author: str, genre: str) -> bool:
-    """Add a new book and persist."""
+    #Add a new book to the library.
     books = get_all_books()
     new_book = Book(title, author, genre)
     books.append(new_book)
@@ -111,7 +122,7 @@ def add_book(title: str, author: str, genre: str) -> bool:
 
 
 def delete_book(book_id: str) -> bool:
-    """Delete a book by ID prefix."""
+    #Delete a book by ID prefix.
     book, books = find_book_by_id(book_id)
     if not book:
         print(f"[!] Book with ID '{book_id}' not found.")
