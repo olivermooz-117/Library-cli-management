@@ -1,8 +1,8 @@
-import uuid
-from storage import load_books, save_books
+import uuid#used to generate unique Ids for books
+from storage import load_books, save_books#they handle loading and saving books to json file.
 
 
-class Book:
+class Book:#its represents a book object and stores information and methods for borrowing and returning
     def __init__(self, title: str, author: str, genre: str, book_id: str = None):
         self._id = book_id or str(uuid.uuid4())
         self._title = title
@@ -28,7 +28,7 @@ class Book:
     def is_borrowed(self):
         return self._is_borrowed
 
-    # ── Borrow / Return ───────────────────────
+    #borrow/return
     def borrow(self, username: str) -> bool:
         if self._is_borrowed:
             print(f"[!] '{self._title}' is already borrowed by {self._borrowed_by}.")
@@ -48,8 +48,8 @@ class Book:
         print(f"[✓] '{self._title}' returned (was borrowed by {borrower}).")
         return True
 
-    # ── Serialisation (to/from dict for JSON) ─
-    def to_dict(self) -> dict:
+    #serialisation-this method converts book objects into dictionaries and back again for json storage.
+    def to_dict(self) -> dict:#converts the book object into a dictionary because json files cannot store custom python objects directy.
         return {
             "id": self._id,
             "title": self._title,
@@ -66,12 +66,12 @@ class Book:
             author=data["author"],
             genre=data["genre"],
             book_id=data["id"],
-        )
+        )#restores borrow status
         book._is_borrowed = data.get("is_borrowed", False)
-        book._borrowed_by = data.get("borrowed_by", None)
+        book._borrowed_by = data.get("borrowed_by", None)#restores borrower username
         return book
 
-    def display(self):
+    def display(self):#displays formatted book details.
         status = f"Borrowed by {self._borrowed_by}" if self._is_borrowed else "Available"
         print(f"  [{self._id[:8]}] {self._title} — {self._author} ({self._genre}) | {status}")
 
@@ -79,7 +79,7 @@ class Book:
         return f"Book(title={self._title}, author={self._author})"
 
 
-# ── Library-level book functions (used by CLI) ─────────────────────────────
+# Library-level book functions 
 
 def get_all_books() -> list:
     """Return all books as Book objects."""

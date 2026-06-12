@@ -3,9 +3,7 @@ import uuid
 from storage import load_users, save_users
 
 
-# ──────────────────────────────────────────────
-# Decorator: require login
-# ──────────────────────────────────────────────
+# function decorators for access control. They wrap around functions to check if a user is logged in or if they have admin privileges before allowing the function to execute.
 def require_login(func):
     """Decorator that blocks a function if no user is logged in."""
     def wrapper(current_user, *args, **kwargs):
@@ -26,17 +24,13 @@ def require_admin(func):
     return wrapper
 
 
-# ──────────────────────────────────────────────
-# Password hashing
-# ──────────────────────────────────────────────
+# password hashing function. It takes a plaintext password and returns a hashed version using SHA-256. This is used to securely store passwords in the JSON file without exposing the actual password. 
 def _hash_password(password: str) -> str:
     """Return a SHA-256 hash of the password."""
     return hashlib.sha256(password.encode()).hexdigest()
 
 
-# ──────────────────────────────────────────────
-# Auth functions
-# ──────────────────────────────────────────────
+# auth functions for registering and logging in users. They interact with the JSON storage to save and verify user credentials.
 def register(username: str, password: str, role: str = "user") -> bool:
     """
     Register a new user.

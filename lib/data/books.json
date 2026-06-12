@@ -6,6 +6,8 @@
         "genre": "Self-afflicted",
         "is_borrowed": true,
         "borrowed_by": "Santa"
+    },
+    {
         "id": "book1-1111-1111-1111",
         "title": "The Great Gatsby",
         "author": "F. Scott Fitzgerald",
@@ -23,8 +25,8 @@
     },
     {
         "id": "book3-3333-3333-3333",
-        "title": "To Kill a Mockingbird",
-        "author": "Harper Lee",
+        "title": "River and the Source",
+        "author": "Margaret Ogola",
         "genre": "Classic",
         "is_borrowed": true,
         "borrowed_by": "oliver"

@@ -1,11 +1,11 @@
 import json
 import os
-
+# This module handles loading and saving users and books to JSON files.
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
 BOOKS_FILE = os.path.join(DATA_DIR, "books.json")
 
-
+# Utility functions for data persistence (JSON storage)
 def _ensure_data_dir():
     """Make sure the data folder exists."""
     os.makedirs(DATA_DIR, exist_ok=True)
