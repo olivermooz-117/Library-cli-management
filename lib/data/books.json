@@ -1,5 +1,11 @@
 [
     {
+        "id": "8bbc1738-7451-4119-b29d-0d56c144e768",
+        "title": "48 Laws of Power",
+        "author": "Mark Zuchenburg",
+        "genre": "Self-afflicted",
+        "is_borrowed": true,
+        "borrowed_by": "Santa"
         "id": "book1-1111-1111-1111",
         "title": "The Great Gatsby",
         "author": "F. Scott Fitzgerald",
