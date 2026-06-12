@@ -10,7 +10,7 @@ def _ensure_data_dir():
     """Make sure the data folder exists."""
     os.makedirs(DATA_DIR, exist_ok=True)
 
-
+# Functions to load and save users and books. They read/write JSON files and handle errors gracefully, returning empty lists if files are missing or corrupted.
 def load_users():
     """Load all users from users.json. Returns a list."""
     _ensure_data_dir()
@@ -22,7 +22,7 @@ def load_users():
     except (json.JSONDecodeError, IOError):
         return []
 
-
+# The save functions attempt to write the provided data to the respective JSON files. They return True on success and False if an error occurs, printing an error message in that case.
 def save_users(users):
     """Save a list of user dicts to users.json."""
     _ensure_data_dir()
@@ -34,7 +34,7 @@ def save_users(users):
         print(f"[ERROR] Could not save users: {e}")
         return False
 
-
+# Similar load/save functions for books.
 def load_books():
     """Load all books from books.json. Returns a list."""
     _ensure_data_dir()
@@ -46,7 +46,7 @@ def load_books():
     except (json.JSONDecodeError, IOError):
         return []
 
-
+# The save functions attempt to write the provided data to the respective JSON files. They return True on success and False if an error occurs, printing an error message in that case.
 def save_books(books):
     """Save a list of book dicts to books.json."""
     _ensure_data_dir()

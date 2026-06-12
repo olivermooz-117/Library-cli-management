@@ -13,7 +13,7 @@ def require_login(func):
         return func(current_user, *args, **kwargs)
     return wrapper
 
-
+# Admin-only decorator. It checks if the current user has an admin role before allowing access to certain functions. If the user is not an admin, it prints a warning message and prevents the function from executing.
 def require_admin(func):
     """Decorator that blocks a function if the user is not an admin."""
     def wrapper(current_user, *args, **kwargs):
@@ -61,7 +61,7 @@ def register(username: str, password: str, role: str = "user") -> bool:
     print(f"[✓] User '{username}' registered successfully as {role}.")
     return True
 
-
+# The login function checks the provided username and password against the stored user data. It loads all users from the JSON file, hashes the input password, and compares it to the stored hashed passwords. If a match is found, it returns the user dictionary; otherwise, it returns None and prints an error message.
 def login(username: str, password: str):
     """
     Attempt to log in.
